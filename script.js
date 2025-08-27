@@ -80,3 +80,33 @@ const clearButton = document.getElementById('clear-btn').addEventListener('click
     document.getElementById('history').innerHTML = ''
 })
 
+
+// copy button function
+let copyCounter = 2
+
+const copyButton = document.querySelectorAll(".copy-button")
+for(const copy of copyButton){
+    copy.addEventListener("click", async function(){
+        const card = copy.closest(".parent-card")
+
+        const numberElement = card.querySelector(".hotline-number")
+        
+        const numberToCopy = numberElement.innerText
+
+        try{
+            await navigator.clipboard.writeText(numberToCopy);
+            alert(`Copied: ${numberToCopy}`)
+        }
+        catch(e){
+            alert("Copy failed!")
+        }
+
+        
+        const copyNumbers = document.getElementById("copy-number")
+        copyCounter++
+        copyNumbers.innerText = copyCounter
+
+    })
+}
+
+
